@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RASPUTIN Transit</title>
+<meta name="theme-color" content="#100403">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RASPUTIN">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;700&family=Barlow:wght@500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  /* Phone-first Warmind dashboard: orb header, alerts first, then directions, buses, weather. Crimson-black, forge orange, white-hot gold. */
+  :root {
+    color-scheme: dark;
+    --bg: #100403; --panel: rgba(34, 9, 6, .78); --ink: #fff1e4; --dim: #b9917f;
+    --c: #ff6a1f; --warn: #ff3b2a; --note: #ffc23a; --ok: #6fd08c;
+    --display: 'Oxanium', 'Segoe UI', sans-serif; --body: 'Barlow', 'Segoe UI', system-ui, sans-serif; --mono: 'Share Tech Mono', ui-monospace, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { background: var(--bg); }
+  body { background: radial-gradient(ellipse at 50% 0%, #2a0d06 0%, var(--bg) 60%) var(--bg); color: var(--ink); font: 500 16px/1.4 var(--body); min-height: 100vh; }
+  main { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;
+    padding-block: max(14px, env(safe-area-inset-top, 0px)) max(28px, env(safe-area-inset-bottom, 0px));
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  header { display: flex; align-items: center; gap: 12px; }
+  #orb { width: 84px; height: 84px; flex: none; }
+  .brand { font: 700 18px var(--display); letter-spacing: .32em; text-shadow: 0 0 14px var(--c); }
+  .brand small { display: block; font: 12px var(--mono); letter-spacing: .12em; color: var(--dim); margin-top: 2px; text-shadow: none; }
+  #updated { font: 12px var(--mono); color: var(--dim); margin-top: 4px; }
+  .card { padding: 12px 14px; background: var(--panel); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); border-left: 4px solid var(--c);
+    clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px); }
+  .card h2 { font: 700 11px var(--display); letter-spacing: .28em; color: var(--c); padding-bottom: 5px; margin-bottom: 8px; border-bottom: 1px solid color-mix(in srgb, var(--c) 28%, transparent); display: flex; justify-content: space-between; gap: 8px; }
+  .card h2 span { font: 12px var(--mono); color: var(--dim); letter-spacing: .04em; }
+  .note { font: 13px var(--mono); color: var(--dim); }
+  .row { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
+  .row + .row { border-top: 1px solid rgba(255,255,255,.06); }
+  .grow { flex: 1; min-width: 0; }
+  .pill { font: 700 10px var(--display); letter-spacing: .14em; padding: 2px 7px; color: #100403; background: var(--ok); flex: none; }
+  .pill.warn { background: var(--warn); color: #fff; } .pill.note { background: var(--note); }
+  .t { font-weight: 600; } .s { font: 12px var(--mono); color: var(--dim); overflow-wrap: anywhere; }
+  .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  button, .btn { font: 700 12px var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--c); cursor: pointer; padding: 12px 10px; text-align: center; text-decoration: none; display: block;
+    background: rgba(24,6,4,.85); border: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); }
+  button:active, .btn:active { background: color-mix(in srgb, var(--c) 30%, transparent); color: #fff; }
+  button:disabled, .btn.off { opacity: .4; pointer-events: none; }
+  button.small { padding: 6px 10px; font-size: 11px; }
+  .stop { padding: 6px 0 10px; } .stop + .stop { border-top: 1px solid rgba(255,255,255,.1); }
+  .stop h3 { font: 600 16px var(--body); display: flex; justify-content: space-between; gap: 8px; }
+  .svc { display: flex; align-items: center; gap: 10px; padding: 5px 0; }
+  .svc b { font: 700 20px var(--display); min-width: 52px; }
+  .eta { display: flex; gap: 8px; flex: 1; flex-wrap: wrap; }
+  .eta a { font: 14px var(--mono); color: var(--ink); text-decoration: none; padding: 2px 7px; border: 1px solid rgba(255,255,255,.18); border-bottom: 3px solid var(--ok); }
+  .eta a.SDA { border-bottom-color: var(--note); } .eta a.LSD { border-bottom-color: var(--warn); } .eta a.none { border-bottom-color: #555; color: var(--dim); }
+  details { border-top: 1px solid rgba(255,255,255,.08); padding-top: 8px; margin-top: 8px; } summary { cursor: pointer; font: 12px var(--mono); color: var(--dim); letter-spacing: .08em; }
+  label { display: block; font: 11px var(--mono); letter-spacing: .14em; color: var(--dim); margin: 10px 0 3px; text-transform: uppercase; }
+  input, select { width: 100%; font: 16px var(--body); color: #fff; background: rgba(24,6,4,.9); padding: 8px 10px; border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); border-radius: 0; }
+  input:focus, select:focus { outline: 2px solid var(--c); outline-offset: 0; }
+  .hit { width: 100%; text-align: left; text-transform: none; letter-spacing: 0; font: 500 15px var(--body); margin-top: 4px; }
+  .x { background: transparent; border: 0; clip-path: none; color: var(--dim); font: 16px var(--mono); padding: 4px 8px; }
+  .hint { margin-top: 6px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <canvas id="orb" width="168" height="168" aria-hidden="true"></canvas>
+    <div><div class="brand">RASPUTIN<small>TRANSIT / SINGAPORE</small></div><div id="updated">Loading...</div></div>
+  </header>
+
+  <section class="card"><h2>ALERTS <span id="alertCount"></span></h2><div id="alerts"><div class="note">Checking...</div></div></section>
+
+  <section class="card"><h2>DIRECTIONS</h2>
+    <div class="btns"><a class="btn off" id="toWork" target="_blank" rel="noopener">To work</a><a class="btn off" id="toHome" target="_blank" rel="noopener">To home</a></div>
+    <div class="note hint" id="dirHint"></div></section>
+
+  <section class="card"><h2>BUSES <span id="busUpdated"></span></h2><div id="bus"><div class="note">Add a stop in Config.</div></div></section>
+
+  <section class="card"><h2>WEATHER <span id="wxUpdated"></span></h2><div id="wx"><div class="note">Loading...</div></div></section>
+
+  <section class="card"><h2>CONFIG</h2>
+    <label for="homeAddr">Home address or postal code</label><input id="homeAddr" autocomplete="off">
+    <label for="homeArea">Home weather area</label><select id="homeArea"></select>
+    <label for="workAddr">Work address or postal code</label><input id="workAddr" autocomplete="off">
+    <label for="workArea">Work weather area</label><select id="workArea"></select>
+    <label for="stopQ">Add a bus stop (name, road or 5-digit code)</label><input id="stopQ" autocomplete="off" placeholder="e.g. Opp Blk 123 or 83139"><div id="stopHits"></div>
+    <div id="myStops"></div>
+    <details><summary>TRANSIT PROXY (buses and MRT alerts)</summary>
+      <label for="proxy">Proxy URL</label><input id="proxy" autocomplete="off" inputmode="url" placeholder="https://rasputin-transit.yourname.workers.dev">
+      <label for="token">App token</label><input id="token" type="password" autocomplete="off">
+      <div class="note hint">Stored on this phone only. Weather works without it. See README for setup.</div></details>
+  </section>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const h = (tag, props, ...kids) => { const e = document.createElement(tag); Object.assign(e, props || {}); kids.flat().forEach(k => e.append(k)); return e; };
+const AREAS = ['Ang Mo Kio','Bedok','Bishan','Boon Lay','Bukit Batok','Bukit Merah','Bukit Panjang','Bukit Timah','Central Water Catchment','Changi','Choa Chu Kang','City','Clementi','Geylang','Hougang','Jalan Bahar','Jurong East','Jurong Island','Jurong West','Kallang','Lim Chu Kang','Mandai','Marine Parade','Novena','Pasir Ris','Paya Lebar','Pioneer','Pulau Tekong','Pulau Ubin','Punggol','Queenstown','Seletar','Sembawang','Sengkang','Sentosa','Serangoon','Southern Islands','Sungei Kadut','Tampines','Tanglin','Tengah','Toa Payoh','Tuas','Western Islands','Western Water Catchment','Woodlands','Yishun'];
+
+/* ---------- settings (this device only) ---------- */
+const KEY = 'rasputin.transit.v1';
+const load = () => { try { return Object.assign({ home: { addr: '', area: '' }, work: { addr: '', area: '' }, stops: [], proxy: '', token: '' }, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch { return { home: { addr: '', area: '' }, work: { addr: '', area: '' }, stops: [], proxy: '', token: '' }; } };
+let S = load();
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch {} };
+
+/* ---------- helpers ---------- */
+const km = (a, b, c, d) => { const r = x => x * Math.PI / 180, dl = r(c - a), dn = r(d - b), q = Math.sin(dl / 2) ** 2 + Math.cos(r(a)) * Math.cos(r(c)) * Math.sin(dn / 2) ** 2; return 12742 * Math.asin(Math.sqrt(q)); };
+const sev = t => /thunder|heavy|storm/i.test(t) ? 'warn' : /shower|rain|drizzle/i.test(t) ? 'note' : 'ok';
+const regionOf = l => l.longitude > 103.9 ? 'east' : l.longitude < 103.74 ? 'west' : l.latitude > 1.40 ? 'north' : l.latitude < 1.285 ? 'south' : 'central';
+const hm = d => d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+const pill = (s, text) => h('span', { className: 'pill ' + (s === 'ok' ? '' : s), textContent: text || (s === 'warn' ? 'ALERT' : s === 'note' ? 'WATCH' : 'CLEAR') });
+async function px(path) {
+  if (!S.proxy) throw new Error('no-proxy');
+  const r = await fetch(S.proxy.replace(/\/$/, '') + path, { headers: { 'X-App-Token': S.token } });
+  if (!r.ok) throw new Error('proxy ' + r.status); return r.json();
+}
+
+/* ---------- weather (open data, no key) ---------- */
+const API = 'https://api-open.data.gov.sg/v2/real-time/api/';
+let W = { two: null, h24: null, rain: null, err: null, at: null }, MRT = { status: 'unknown', msgs: [] };
+async function loadWeather() {
+  try {
+    const [a, b, c] = await Promise.all(['two-hr-forecast', 'twenty-four-hr-forecast', 'rainfall'].map(p => fetch(API + p).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })));
+    W = { two: a.data, h24: b.data, rain: c.data, err: null, at: new Date() };
+  } catch (e) { W.err = String(e.message || e); }
+  renderWeather(); renderAlerts(); stamp();
+}
+const fc = area => { const f = W.two && W.two.items[0].forecasts.find(x => x.area === area); return f ? f.forecast : null; };
+const loc = area => { const m = W.two && W.two.area_metadata.find(x => x.name === area); return m ? m.label_location : null; };
+function gauge(area) {
+  const l = loc(area); if (!l || !W.rain) return null;
+  let best = null; for (const s of W.rain.stations) { const d = km(l.latitude, l.longitude, s.location.latitude, s.location.longitude); if (!best || d < best.d) best = { s, d }; }
+  const rd = W.rain.readings[0] && W.rain.readings[0].data.find(x => x.stationId === best.s.id);
+  return rd ? { name: best.s.name, mm: rd.value, km: best.d } : null;
+}
+const places = () => [['Home', S.home.area], ['Work', S.work.area]].filter(p => p[1]);
+
+function renderWeather() {
+  const box = $('wx'); box.textContent = '';
+  if (W.err && !W.two) { box.append(h('div', { className: 'note', textContent: 'Weather feed unavailable (' + W.err + '). Retrying.' })); return; }
+  if (!places().length) box.append(h('div', { className: 'note', textContent: 'Pick your home and work areas in Config.' }));
+  places().forEach(([label, area]) => {
+    const f = fc(area), g = gauge(area), l = loc(area);
+    const row = h('div', { className: 'row' }, pill(f ? sev(f) : 'ok', f ? undefined : 'N/A'),
+      h('div', { className: 'grow' }, h('div', { className: 't', textContent: `${label}: ${area}` }), h('div', { className: 's', textContent: f || 'No forecast' }),
+        g ? h('div', { className: 's', textContent: `Rain gauge ${g.name}: ${g.mm} mm / 5 min` }) : ''));
+    box.append(row);
+    if (l && W.h24) { const rec = W.h24.records[0], reg = regionOf(l), g24 = rec.general;
+      const per = rec.periods.map(p => `${p.timePeriod.text.replace(/ \d+ \w+$/, '')}: ${p.regions[reg].text}`).join('\n');
+      box.append(h('div', { className: 's', textContent: `${reg.toUpperCase()} today\n${per}` , style: 'white-space:pre-line;padding:0 0 6px 0' })); }
+  });
+  if (W.h24) { const g = W.h24.records[0].general; box.append(h('div', { className: 's', style: 'margin-top:6px', textContent: `Island-wide: ${g.forecast.text}, ${g.temperature.low}-${g.temperature.high}°C, humidity ${g.relativeHumidity.low}-${g.relativeHumidity.high}%, wind ${g.wind.direction} ${g.wind.speed.low}-${g.wind.speed.high} km/h` })); }
+  if (W.two) { $('wxUpdated').textContent = 'valid ' + W.two.items[0].valid_period.text; }
+}
+
+/* ---------- alerts ---------- */
+function renderAlerts() {
+  const box = $('alerts'); box.textContent = ''; let worst = 'ok', n = 0;
+  const add = (s, title, sub) => { box.append(h('div', { className: 'row' }, pill(s), h('div', { className: 'grow' }, h('div', { className: 't', textContent: title }), sub ? h('div', { className: 's', textContent: sub }) : ''))); if (s !== 'ok') { n++; if (s === 'warn' || worst === 'ok') worst = s; } };
+  places().forEach(([label, area]) => { const f = fc(area), g = gauge(area);
+    if (f && sev(f) !== 'ok') add(sev(f), `${label} (${area}): ${f}`, 'NEA 2-hour forecast');
+    if (g && g.mm >= 0.2) add(g.mm >= 2.5 ? 'warn' : 'note', `Rain near ${label.toLowerCase()}: ${g.mm} mm in 5 min`, `${g.name}, ${g.km.toFixed(1)} km away`); });
+  if (S.proxy) {
+    if (MRT.status === 'disrupted') add('warn', 'MRT/LRT disruption', MRT.msgs.join(' ').slice(0, 220));
+    else if (MRT.status === 'error') add('note', 'MRT status unavailable', 'Check the proxy in Config.');
+  }
+  if (!box.children.length || (n === 0 && !box.querySelector('.pill.warn,.pill.note'))) add('ok', 'No active alerts', places().length ? 'Weather clear for your areas' + (S.proxy ? ' and MRT running normally' : '') : 'Pick your areas in Config');
+  $('alertCount').textContent = n ? n + ' active' : '';
+  orbMode = worst;
+}
+async function loadMrt() {
+  if (!S.proxy) return;
+  try { const j = await px('/alerts'), v = j.value || j.data || j; const bad = v && (v.Status === 2 || (v.Message && v.Message.length));
+    MRT = { status: bad ? 'disrupted' : 'normal', msgs: ((v && v.Message) || []).map(m => m.Content || String(m)) }; } catch { MRT = { status: 'error', msgs: [] }; }
+  renderAlerts();
+}
+
+/* ---------- buses ---------- */
+let STOPS = null;
+async function stopDb() {
+  if (STOPS) return STOPS;
+  try { const c = JSON.parse(localStorage.getItem('rasputin.stops.v1') || 'null'); if (c && Date.now() - c.t < 7 * 864e5) return (STOPS = c.list); } catch {}
+  const list = await px('/stops'); STOPS = list;
+  try { localStorage.setItem('rasputin.stops.v1', JSON.stringify({ t: Date.now(), list })); } catch {}
+  return list;
+}
+const stopInfo = code => STOPS && STOPS.find(s => s[0] === code);
+async function loadBus() {
+  const box = $('bus');
+  if (!S.stops.length) { box.textContent = ''; box.append(h('div', { className: 'note', textContent: 'Add a bus stop in Config.' })); return; }
+  if (!S.proxy) { box.textContent = ''; box.append(h('div', { className: 'note', textContent: 'Bus timings need the transit proxy. See Config and README.' })); return; }
+  try { await stopDb(); } catch {}
+  const blocks = await Promise.all(S.stops.map(async st => {
+    const info = stopInfo(st.code), wrap = h('div', { className: 'stop' });
+    wrap.append(h('h3', {}, h('span', { textContent: info ? info[1] : 'Stop ' + st.code }), h('span', { className: 's', textContent: (info ? info[2] + ' / ' : '') + st.code })));
+    try {
+      const j = await px('/arrival?stop=' + st.code), want = (st.services || []).map(x => x.toUpperCase());
+      const svcs = (j.Services || []).filter(s => !want.length || want.includes(String(s.ServiceNo).toUpperCase()));
+      if (!svcs.length) wrap.append(h('div', { className: 'note', textContent: 'No buses reported.' }));
+      svcs.forEach(s => {
+        const eta = h('div', { className: 'eta' });
+        [s.NextBus, s.NextBus2, s.NextBus3].forEach(b => {
+          if (!b || !b.EstimatedArrival) return;
+          const m = Math.round((new Date(b.EstimatedArrival) - Date.now()) / 60000), lat = parseFloat(b.Latitude), lon = parseFloat(b.Longitude), ok = lat > 1 && lon > 100;
+          const a = h('a', { className: b.Load || '', textContent: m <= 0 ? 'Arr' : m + ' min' });
+          if (ok) { a.href = `https://www.google.com/maps?q=${lat},${lon}`; a.target = '_blank'; a.rel = 'noopener'; if (info) a.textContent += ' · ' + km(+info[3], +info[4], lat, lon).toFixed(1) + 'km'; }
+          eta.append(a);
+        });
+        if (!eta.children.length) eta.append(h('a', { className: 'none', textContent: 'No data' }));
+        wrap.append(h('div', { className: 'svc' }, h('b', { textContent: s.ServiceNo }), eta));
+      });
+    } catch (e) { wrap.append(h('div', { className: 'note', textContent: e.message === 'no-proxy' ? 'No proxy set.' : 'Could not load (' + e.message + ').' })); }
+    return wrap;
+  }));
+  box.textContent = ''; blocks.forEach(b => box.append(b));
+  $('busUpdated').textContent = hm(new Date());
+  box.append(h('div', { className: 'note', textContent: 'Tap a time to see that bus on the map. Green: seats. Amber: standing. Red: crowded.' }));
+}
+
+/* ---------- directions ---------- */
+function renderDirections() {
+  const set = (id, addr) => { const a = $(id); if (addr) { a.href = 'https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=' + encodeURIComponent(addr + ', Singapore'); a.classList.remove('off'); } else { a.removeAttribute('href'); a.classList.add('off'); } };
+  set('toWork', S.work.addr); set('toHome', S.home.addr);
+  $('dirHint').textContent = (S.work.addr && S.home.addr) ? 'Opens Google Maps with live transit directions from where you are.' : 'Add your home and work addresses in Config.';
+}
+
+/* ---------- config UI ---------- */
+function fillAreas(sel, val) { sel.textContent = ''; sel.append(h('option', { value: '', textContent: '(not set)' })); AREAS.forEach(a => sel.append(h('option', { value: a, textContent: a, selected: a === val }))); }
+function renderStops() {
+  const box = $('myStops'); box.textContent = '';
+  S.stops.forEach((st, i) => { const info = stopInfo(st.code);
+    box.append(h('div', { className: 'row' }, h('div', { className: 'grow' }, h('div', { className: 't', textContent: (info ? info[1] : 'Stop') + ' (' + st.code + ')' }),
+      h('input', { value: (st.services || []).join(','), placeholder: 'Services, e.g. 10,175 (blank = all)', onchange: e => { st.services = e.target.value.split(',').map(x => x.trim()).filter(Boolean); save(); loadBus(); } })),
+      h('button', { className: 'x', textContent: 'x', title: 'Remove stop', onclick: () => { S.stops.splice(i, 1); save(); renderStops(); loadBus(); } }))); });
+}
+let tq; $('stopQ').addEventListener('input', e => { clearTimeout(tq); tq = setTimeout(() => searchStops(e.target.value.trim()), 250); });
+async function searchStops(q) {
+  const box = $('stopHits'); box.textContent = ''; if (q.length < 3) return;
+  if (!S.proxy) { box.append(h('div', { className: 'note', textContent: 'Set the transit proxy first (below).' })); return; }
+  try { const db = await stopDb(), ql = q.toLowerCase();
+    db.filter(s => s[0].includes(q) || s[1].toLowerCase().includes(ql) || s[2].toLowerCase().includes(ql)).slice(0, 8).forEach(s =>
+      box.append(h('button', { className: 'hit', textContent: `${s[1]}, ${s[2]} (${s[0]})`, onclick: () => { if (!S.stops.some(x => x.code === s[0])) S.stops.push({ code: s[0], services: [] }); save(); box.textContent = ''; $('stopQ').value = ''; renderStops(); loadBus(); } })));
+    if (!box.children.length) box.append(h('div', { className: 'note', textContent: 'No stops found.' }));
+  } catch (e) { box.append(h('div', { className: 'note', textContent: 'Could not load stops (' + e.message + ').' })); }
+}
+function bindConfig() {
+  fillAreas($('homeArea'), S.home.area); fillAreas($('workArea'), S.work.area);
+  $('homeAddr').value = S.home.addr; $('workAddr').value = S.work.addr; $('proxy').value = S.proxy; $('token').value = S.token;
+  const on = (id, fn) => $(id).addEventListener('change', e => { fn(e.target.value.trim()); save(); renderDirections(); renderWeather(); renderAlerts(); });
+  on('homeAddr', v => S.home.addr = v); on('workAddr', v => S.work.addr = v); on('homeArea', v => S.home.area = v); on('workArea', v => S.work.area = v);
+  $('proxy').addEventListener('change', e => { S.proxy = e.target.value.trim(); save(); refreshAll(); }); $('token').addEventListener('change', e => { S.token = e.target.value.trim(); save(); refreshAll(); });
+  renderStops(); renderDirections();
+}
+
+/* ---------- orb (lightweight 2D lattice) ---------- */
+let orbMode = 'ok';
+(function orb() {
+  const c = $('orb'), g = c.getContext('2d'), N = 40, pts = [];
+  for (let i = 0; i < N; i++) { const y = 1 - 2 * (i + .5) / N, r = Math.sqrt(1 - y * y), a = i * 2.39996; pts.push([Math.cos(a) * r, y, Math.sin(a) * r]); }
+  const edges = []; pts.forEach((p, i) => pts.map((q, j) => [Math.hypot(p[0] - q[0], p[1] - q[1], p[2] - q[2]), j]).filter(x => x[1] > i).sort((a, b) => a[0] - b[0]).slice(0, 2).forEach(x => edges.push([i, x[1]])));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; let t = 0, last = 0;
+  function frame(ts) {
+    if (ts - last > 33 || reduce) { last = ts; t += 0.012; const W = c.width, cx = W / 2, R = W * 0.4, col = orbMode === 'warn' ? '255,59,42' : orbMode === 'note' ? '255,194,58' : '255,128,40';
+      g.clearRect(0, 0, W, W);
+      const gl = g.createRadialGradient(cx, cx, 0, cx, cx, R * 1.1); gl.addColorStop(0, `rgba(255,240,200,.9)`); gl.addColorStop(.3, `rgba(${col},.45)`); gl.addColorStop(1, `rgba(${col},0)`); g.fillStyle = gl; g.fillRect(0, 0, W, W);
+      const P = pts.map(p => { const x = p[0] * Math.cos(t) + p[2] * Math.sin(t), z = -p[0] * Math.sin(t) + p[2] * Math.cos(t); return [cx + x * R, cx + p[1] * R, z]; });
+      g.lineWidth = 1.5; edges.forEach(([i, j]) => { g.strokeStyle = `rgba(${col},${.25 + .35 * ((P[i][2] + P[j][2]) / 2 + 1) / 2})`; g.beginPath(); g.moveTo(P[i][0], P[i][1]); g.lineTo(P[j][0], P[j][1]); g.stroke(); });
+      P.forEach(p => { g.fillStyle = `rgba(255,${200 + 40 * p[2] | 0},120,${.5 + .4 * (p[2] + 1) / 2})`; g.beginPath(); g.arc(p[0], p[1], 2.2, 0, 7); g.fill(); });
+    }
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* ---------- boot ---------- */
+function stamp() { $('updated').textContent = W.at ? 'Updated ' + hm(W.at) : (W.err ? 'Offline' : 'Loading...'); }
+function refreshAll() { loadWeather(); loadMrt(); loadBus(); }
+bindConfig(); refreshAll();
+setInterval(() => { if (!document.hidden) { loadBus(); loadMrt(); } }, 30000);
+setInterval(() => { if (!document.hidden) loadWeather(); }, 120000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshAll(); });
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+</script>
+</body>
+</html>
