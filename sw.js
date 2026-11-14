@@ -1,5 +1,5 @@
 // Network-first for the app shell so updates arrive immediately; falls back to cache offline. Never touches cross-origin API calls.
-const CACHE = 'rasputin-transit-v5';
+const CACHE = 'rasputin-transit-v6';
 const ASSETS = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 
 self.addEventListener('install', e => {

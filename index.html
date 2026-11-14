@@ -549,10 +549,14 @@ function radarDraw() {
   const b = RAD.box, wide = RAD.view === 'wide';
   const clon = wide ? (b.upperLeft.longitude + b.lowerRight.longitude) / 2 : 103.82, clat = wide ? (b.upperLeft.latitude + b.lowerRight.latitude) / 2 : 1.355, span = wide ? (b.lowerRight.longitude - b.upperLeft.longitude) : 0.62;
   const ppr = W / (span * Math.PI / 180), M = la => Math.log(Math.tan(Math.PI / 4 + la * Math.PI / 360)), mx = lo => W / 2 + (lo - clon) * Math.PI / 180 * ppr, my = la => H / 2 - (M(la) - M(clat)) * ppr;
-  const z = Math.max(8, Math.min(13, Math.ceil(Math.log2(W * dpr * 360 / (256 * span))))), n = 2 ** z;
-  const x0 = Math.floor((clon - span / 2 + 180) / 360 * n), x1 = Math.floor((clon + span / 2 + 180) / 360 * n);
-  const ty = m => Math.floor((1 - m / Math.PI) / 2 * n), y0 = ty(M(clat) + (H / 2) / ppr), y1 = ty(M(clat) - (H / 2) / ppr);
-  if ((x1 - x0 + 1) * (y1 - y0 + 1) <= 40) for (let tx = x0; tx <= x1; tx++) for (let tyy = y0; tyy <= y1; tyy++) {
+  // Pick the sharpest zoom that needs at most 30 tiles: high-density phone screens would otherwise ask for 60+ and draw none.
+  let z = Math.max(8, Math.min(12, Math.ceil(Math.log2(W * dpr * 360 / (256 * span))))), n, x0, x1, y0, y1;
+  for (;; z--) {
+    n = 2 ** z; x0 = Math.floor((clon - span / 2 + 180) / 360 * n); x1 = Math.floor((clon + span / 2 + 180) / 360 * n);
+    const tyf = m => Math.floor((1 - m / Math.PI) / 2 * n); y0 = tyf(M(clat) + (H / 2) / ppr); y1 = tyf(M(clat) - (H / 2) / ppr);
+    if ((x1 - x0 + 1) * (y1 - y0 + 1) <= 30 || z <= 8) break;
+  }
+  if ((x1 - x0 + 1) * (y1 - y0 + 1) <= 64) for (let tx = x0; tx <= x1; tx++) for (let tyy = y0; tyy <= y1; tyy++) {
     const im = radarTile(z, tx, tyy); if (!(im.complete && im.naturalWidth)) continue;
     const px = mx(tx / n * 360 - 180), py = H / 2 - (Math.PI * (1 - 2 * tyy / n) - M(clat)) * ppr, sz = 2 * Math.PI / n * ppr; g.drawImage(im, px, py, sz + .6, sz + .6);
   }
