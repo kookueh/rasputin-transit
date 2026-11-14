@@ -64,6 +64,37 @@
   .hit { width: 100%; text-align: left; text-transform: none; letter-spacing: 0; font: 500 15px var(--body); margin-top: 4px; }
   .x { background: transparent; border: 0; clip-path: none; color: var(--dim); font: 16px var(--mono); padding: 4px 8px; }
   .hint { margin-top: 6px; }
+  #near { margin-top: 8px; } .nstop { border-top: 1px solid rgba(255,255,255,.08); } .nstop > button { width: 100%; text-align: left; display: flex; justify-content: space-between; gap: 8px; background: transparent; border: 0; clip-path: none; color: #fff; font: 500 15px var(--body); letter-spacing: 0; text-transform: none; padding: 10px 2px; }
+  .nstop > button small { font: 11px var(--mono); color: var(--dim); display: block; } .nstop > button .d { font: 700 13px var(--mono); color: var(--c); white-space: nowrap; } .nstop .tk { color: #5fd36a; font: 11px var(--mono); }
+  .nsvc[hidden] { display: none; } .nsvc { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 2px 10px; } .nsvc button { font: 700 13px var(--mono); letter-spacing: .04em; padding: 6px 10px; background: transparent; color: var(--dim); border: 1px solid var(--dim); clip-path: none; } .nsvc button small { font: 11px var(--mono); margin-left: 6px; opacity: .8; } .nsvc button.on { color: #100403; background: var(--c); border-color: var(--c); }
+  #radar { width: 100%; height: 320px; display: none; margin-top: 10px; border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); background: #0c0302; cursor: pointer; touch-action: manipulation; }
+  #rchips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; } #rchips button { font: 11px var(--mono); letter-spacing: .1em; padding: 4px 8px; background: transparent; color: var(--dim); border: 1px solid var(--dim); clip-path: none; } #rchips button.on { color: var(--c); border-color: var(--c); }
+  main { padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px)) !important; }
+  .panel { display: none; flex-direction: column; gap: 12px; } .panel.on { display: flex; }
+  #dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: linear-gradient(rgba(26,8,5,.94), rgba(16,4,3,.98)); border-top: 1px solid color-mix(in srgb, var(--c) 45%, transparent); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  #dockNav { display: grid; grid-template-columns: repeat(5, 1fr); max-width: 560px; margin: 0 auto; }
+  #dockNav button { clip-path: none; background: transparent; border: 0; color: var(--dim); padding: 9px 0 7px; font: 700 10px var(--display); letter-spacing: .14em; display: flex; flex-direction: column; align-items: center; gap: 4px; position: relative; }
+  #dockNav button:active { background: color-mix(in srgb, var(--c) 18%, transparent); color: #fff; }
+  #dockNav svg { width: 26px; height: 26px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  #dockNav button.on { color: var(--c); } #dockNav button.on svg { filter: drop-shadow(0 0 6px var(--c)); }
+  #dockNav button.on:before { content: ""; position: absolute; top: 0; left: 22%; right: 22%; height: 2px; background: var(--c); box-shadow: 0 0 8px var(--c); }
+  .badge { display: none; position: absolute; top: 6px; left: calc(50% + 8px); width: 10px; height: 10px; border-radius: 50%; background: var(--warn); border: 2px solid #100403; }
+  .badge.warn { display: block; } .badge.note { display: block; background: var(--note); }
+  .card h2 { cursor: pointer; user-select: none; -webkit-user-select: none; }
+  .card h2:after { content: "\25BE"; color: var(--dim); font: 12px var(--mono); margin-left: 4px; }
+  .card.min h2:after { content: "\25B8"; }
+  .card.min > :not(h2) { display: none !important; }
+  .card.min h2 { margin-bottom: 0; padding-bottom: 0; border-bottom: 0; }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; }
+  .tile { border: 1px solid rgba(255,255,255,.14); border-bottom: 3px solid var(--ok); padding: 8px 4px; text-align: center; }
+  .tile b { display: block; font: 700 22px var(--display); } .tile span { font: 10px var(--mono); letter-spacing: .12em; color: var(--dim); }
+  .tile.note { border-bottom-color: var(--note); } .tile.warn { border-bottom-color: var(--warn); } .tile.off { border-bottom-color: #555; }
+  .rctl { display: flex; gap: 6px; flex-wrap: wrap; } .rctl button { clip-path: none; font: 11px var(--mono); letter-spacing: .1em; padding: 6px 10px; background: transparent; color: var(--dim); border: 1px solid var(--dim); } .rctl button.on { color: var(--c); border-color: var(--c); }
+  #rrad { width: 100%; aspect-ratio: 1 / 1; display: block; margin-top: 8px; border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); background: #0c0302; cursor: pointer; touch-action: manipulation; }
+  .cams { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; } .cams a { display: block; text-decoration: none; color: var(--ink); border: 1px solid rgba(255,255,255,.14); background: #0c0302; }
+  .cams img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; background: #1a0805; } .cams span { display: block; font: 11px var(--mono); color: var(--dim); padding: 4px 6px; }
+  #taxis canvas { width: 100%; display: block; margin-top: 8px; border: 1px solid rgba(255,255,255,.14); background: #0c0302; } .tx-sig { margin-top: 8px; padding: 8px 10px; border-left: 3px solid var(--note); background: rgba(255,194,58,.08); font: 13px var(--mono); color: var(--ink); }
+  .cp { cursor: pointer; } .cp .free { font: 700 20px var(--display); text-align: right; white-space: nowrap; } .cp .free small { font: 11px var(--mono); color: var(--dim); display: block; }
 </style>
 </head>
 <body>
@@ -73,29 +104,61 @@
     <div><div class="brand">RASPUTIN<small>TRANSIT / SINGAPORE</small></div><div id="updated">Loading...</div><a href="https://claude.ai/artifact/9pdxsVLFA9nFZiRAtwFxXo" style="display:inline-block;margin-top:6px;font:12px var(--mono);letter-spacing:.2em;color:var(--dim);text-decoration:none;border:1px solid var(--dim);padding:4px 10px">&#9666; CONSOLE</a></div>
   </header>
 
-  <section class="card"><h2>ALERTS <span id="alertCount"></span></h2><div id="alerts"><div class="note">Checking...</div></div></section>
+  <div class="panel" data-p="home">
+    <section class="card" id="c-alerts"><h2>ALERTS <span id="alertCount"></span></h2><div id="alerts"><div class="note">Checking...</div></div></section>
 
-  <section class="card"><h2>DIRECTIONS</h2>
-    <div class="btns"><a class="btn off" id="toWork" target="_blank" rel="noopener">To work</a><a class="btn off" id="toHome" target="_blank" rel="noopener">To home</a></div>
-    <div class="note hint" id="dirHint"></div></section>
+    <section class="card" id="c-dir"><h2>DIRECTIONS</h2>
+      <div class="btns"><a class="btn off" id="toWork" target="_blank" rel="noopener">To work</a><a class="btn off" id="toHome" target="_blank" rel="noopener">To home</a></div>
+      <div class="note hint" id="dirHint"></div></section>
+  </div>
 
-  <section class="card"><h2>BUSES <span id="busUpdated"></span></h2><div id="bus"><div class="note">Add a stop in Config.</div></div></section>
+  <div class="panel" data-p="bus">
+    <section class="card" id="c-near"><h2>NEARBY STOPS <span id="nearHint"></span></h2>
+      <div class="btns"><button class="btn" id="findNear" type="button">Find stops near me</button></div>
+      <div id="near"></div></section>
 
-  <section class="card"><h2>WEATHER <span id="wxUpdated"></span></h2><div id="wx"><div class="note">Loading...</div></div></section>
+    <section class="card" id="c-bus"><h2>BUSES <span id="busUpdated"></span></h2><div id="bus"><div class="note">Add a stop in Setup.</div></div><div id="rchips"></div><canvas id="radar"></canvas></section>
+  </div>
 
-  <section class="card"><h2>CONFIG</h2>
-    <label for="homeAddr">Home address or postal code</label><input id="homeAddr" autocomplete="off">
-    <label for="homeArea">Home weather area</label><select id="homeArea"></select>
-    <label for="workAddr">Work address or postal code</label><input id="workAddr" autocomplete="off">
-    <label for="workArea">Work weather area</label><select id="workArea"></select>
-    <label for="stopQ">Add a bus stop (name, road or 5-digit code)</label><input id="stopQ" autocomplete="off" placeholder="e.g. Opp Blk 123 or 83139"><div id="stopHits"></div>
-    <div id="myStops"></div>
-    <details><summary>TRANSIT PROXY (buses and MRT alerts)</summary>
-      <label for="proxy">Proxy URL</label><input id="proxy" autocomplete="off" inputmode="url" placeholder="https://rasputin-transit.yourname.workers.dev">
-      <label for="token">App token</label><input id="token" type="password" autocomplete="off">
-      <div class="note hint">Stored on this phone only. Weather works without it. See README for setup.</div></details>
-  </section>
+  <div class="panel" data-p="sky">
+    <section class="card" id="c-radar"><h2>RAIN RADAR <span id="radarTime"></span></h2>
+      <div class="rctl"><button id="rPlay" type="button">Pause</button><button data-v="island" class="on" type="button">Island</button><button data-v="wide" type="button">Wide</button><button id="rLoc" type="button">Locate me</button></div>
+      <canvas id="rrad"></canvas>
+      <div class="note hint" id="radarNote">Tap the map to pause or play. Colour shows rain intensity.</div></section>
+
+    <section class="card" id="c-cond"><h2>CONDITIONS <span id="condTime"></span></h2><div id="cond"><div class="note">Loading...</div></div></section>
+
+    <section class="card" id="c-wx"><h2>FORECAST <span id="wxUpdated"></span></h2><div id="wx"><div class="note">Loading...</div></div></section>
+  </div>
+
+  <div class="panel" data-p="road">
+    <section class="card" id="c-where"><h2>SEARCH AROUND <span id="roadWhere"></span></h2>
+      <div class="rctl" id="anchors"><button data-a="me" type="button">Me</button><button data-a="work" type="button">Work</button><button data-a="home" type="button">Home</button></div>
+      <div class="note hint">Pick where to look. Me uses your phone's location for this search only. Work and Home use the addresses in Setup.</div></section>
+
+    <section class="card" id="c-taxi"><h2>TAXIS <span id="taxiTime"></span></h2><div id="taxis"><div class="note">Pick Me, Work or Home above.</div></div></section>
+
+    <section class="card" id="c-car"><h2>CARPARKS <span id="cpTime"></span></h2><div id="cps"><div class="note">Pick Me, Work or Home above. HDB carparks only.</div></div></section>
+
+    <section class="card" id="c-cam"><h2>TRAFFIC CAMERAS <span id="camTime"></span></h2><div id="cams"><div class="note">Pick Me, Work or Home above.</div></div></section>
+  </div>
+
+  <div class="panel" data-p="setup">
+    <section class="card" id="c-config"><h2>SETUP</h2>
+      <label for="homeAddr">Home address or postal code</label><input id="homeAddr" autocomplete="off">
+      <label for="homeArea">Home weather area</label><select id="homeArea"></select>
+      <label for="workAddr">Work address or postal code</label><input id="workAddr" autocomplete="off">
+      <label for="workArea">Work weather area</label><select id="workArea"></select>
+      <label for="stopQ">Add a bus stop (name, road or 5-digit code)</label><input id="stopQ" autocomplete="off" placeholder="e.g. Opp Blk 123 or 83139"><div id="stopHits"></div>
+      <div id="myStops"></div>
+      <details><summary>TRANSIT PROXY (buses and MRT alerts)</summary>
+        <label for="proxy">Proxy URL</label><input id="proxy" autocomplete="off" inputmode="url" placeholder="https://rasputin-transit.yourname.workers.dev">
+        <label for="token">App token</label><input id="token" type="password" autocomplete="off">
+        <div class="note hint">Stored on this phone only. Weather works without it. See README for setup.</div></details>
+    </section>
+  </div>
 </main>
+<div id="dock"><nav id="dockNav"></nav></div>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -125,7 +188,7 @@ const API = 'https://api-open.data.gov.sg/v2/real-time/api/';
 let W = { two: null, h24: null, rain: null, err: null, at: null }, MRT = { status: 'unknown', msgs: [] };
 async function loadWeather() {
   try {
-    const [a, b, c] = await Promise.all(['two-hr-forecast', 'twenty-four-hr-forecast', 'rainfall'].map(p => fetch(API + p).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })));
+    const [a, b, c] = await Promise.all(['two-hr-forecast', 'twenty-four-hr-forecast', 'rainfall'].map(p => jget(API + p)));
     W = { two: a.data, h24: b.data, rain: c.data, err: null, at: new Date() };
   } catch (e) { W.err = String(e.message || e); }
   renderWeather(); renderAlerts(); stamp();
@@ -143,7 +206,7 @@ const places = () => [['Home', S.home.area], ['Work', S.work.area]].filter(p => 
 function renderWeather() {
   const box = $('wx'); box.textContent = '';
   if (W.err && !W.two) { box.append(h('div', { className: 'note', textContent: 'Weather feed unavailable (' + W.err + '). Retrying.' })); return; }
-  if (!places().length) box.append(h('div', { className: 'note', textContent: 'Pick your home and work areas in Config.' }));
+  if (!places().length) box.append(h('div', { className: 'note', textContent: 'Pick your home and work areas in Setup.' }));
   places().forEach(([label, area]) => {
     const f = fc(area), g = gauge(area), l = loc(area);
     const row = h('div', { className: 'row' }, pill(f ? sev(f) : 'ok', f ? undefined : 'N/A'),
@@ -165,13 +228,15 @@ function renderAlerts() {
   places().forEach(([label, area]) => { const f = fc(area), g = gauge(area);
     if (f && sev(f) !== 'ok') add(sev(f), `${label} (${area}): ${f}`, 'NEA 2-hour forecast');
     if (g && g.mm >= 0.2) add(g.mm >= 2.5 ? 'warn' : 'note', `Rain near ${label.toLowerCase()}: ${g.mm} mm in 5 min`, `${g.name}, ${g.km.toFixed(1)} km away`); });
+  const lta = lightningAlert(); if (lta) add(lta.s, lta.title, lta.sub);
+  const uvn = uvNow(); if (uvn !== null && uvn >= 8) add(uvn >= 11 ? 'warn' : 'note', `UV index ${uvn} (${uvCat(uvn)})`, 'Cover up and seek shade');
   if (S.proxy) {
     if (MRT.status === 'disrupted') add('warn', 'MRT/LRT disruption', MRT.msgs.join(' ').slice(0, 220));
-    else if (MRT.status === 'error') add('note', 'MRT status unavailable', 'Check the proxy in Config.');
+    else if (MRT.status === 'error') add('note', 'MRT status unavailable', 'Check the proxy in Setup.');
   }
-  if (!box.children.length || (n === 0 && !box.querySelector('.pill.warn,.pill.note'))) add('ok', 'No active alerts', places().length ? 'Weather clear for your areas' + (S.proxy ? ' and MRT running normally' : '') : 'Pick your areas in Config');
+  if (!box.children.length || (n === 0 && !box.querySelector('.pill.warn,.pill.note'))) add('ok', 'No active alerts', places().length ? 'Weather clear for your areas' + (S.proxy ? ' and MRT running normally' : '') : 'Pick your areas in Setup');
   $('alertCount').textContent = n ? n + ' active' : '';
-  orbMode = worst;
+  orbMode = worst; if (typeof badge === 'function' && $('tab-home')) badge(worst);
 }
 async function loadMrt() {
   if (!S.proxy) return;
@@ -192,11 +257,13 @@ async function stopDb() {
 const stopInfo = code => STOPS && STOPS.find(s => s[0] === code);
 async function loadBus() {
   const box = $('bus');
-  if (!S.stops.length) { box.textContent = ''; box.append(h('div', { className: 'note', textContent: 'Add a bus stop in Config.' })); return; }
-  if (!S.proxy) { box.textContent = ''; box.append(h('div', { className: 'note', textContent: 'Bus timings need the transit proxy. See Config and README.' })); return; }
+  if (!S.stops.length) { box.textContent = ''; box.append(h('div', { className: 'note', textContent: 'Add a bus stop in Setup.' })); return; }
+  if (!S.proxy) { box.textContent = ''; box.append(h('div', { className: 'note', textContent: 'Bus timings need the transit proxy. See Setup and README.' })); return; }
   try { await stopDb(); } catch {}
+  const radarStops = [];
   const blocks = await Promise.all(S.stops.map(async st => {
     const info = stopInfo(st.code), wrap = h('div', { className: 'stop' });
+    const rs = { lat: info ? +info[3] : NaN, lon: info ? +info[4] : NaN, name: info ? info[1] : 'Stop ' + st.code, buses: [] }; if (info) radarStops.push(rs);
     wrap.append(h('h3', {}, h('span', { textContent: info ? info[1] : 'Stop ' + st.code }), h('span', { className: 's', textContent: (info ? info[2] + ' / ' : '') + st.code })));
     try {
       const j = await px('/arrival?stop=' + st.code), want = (st.services || []).map(x => x.toUpperCase());
@@ -208,6 +275,7 @@ async function loadBus() {
           if (!b || !b.EstimatedArrival) return;
           const m = Math.round((new Date(b.EstimatedArrival) - Date.now()) / 60000), lat = parseFloat(b.Latitude), lon = parseFloat(b.Longitude), ok = lat > 1 && lon > 100;
           const a = h('a', { className: b.Load || '', textContent: m <= 0 ? 'Arr' : m + ' min' });
+          if (ok) rs.buses.push({ svc: s.ServiceNo, lat, lon, m, load: b.Load || '' });
           if (ok) { a.href = `https://www.google.com/maps?q=${lat},${lon}`; a.target = '_blank'; a.rel = 'noopener'; if (info) a.textContent += ' · ' + km(+info[3], +info[4], lat, lon).toFixed(1) + 'km'; }
           eta.append(a);
         });
@@ -219,14 +287,69 @@ async function loadBus() {
   }));
   box.textContent = ''; blocks.forEach(b => box.append(b));
   $('busUpdated').textContent = hm(new Date());
-  box.append(h('div', { className: 'note', textContent: 'Tap a time to see that bus on the map. Green: seats. Amber: standing. Red: crowded.' }));
+  box.append(h('div', { className: 'note', textContent: 'Radar: centre is your stop, rings show distance. Tap a blip to open that bus in Google Maps. Green: seats. Amber: standing. Red: crowded. Buses with no reported position are not shown.' }));
+  setRadar(radarStops);
+}
+let RS = [], rSel = 0, rHits = [], rT0 = performance.now(), rRaf = 0;
+const LOADC = { SEA: '#5fd36a', SDA: '#ffb02e', LSD: '#ff4a3a', '': '#ffd24a' };
+function setRadar(stops) {
+  RS = stops; if (rSel >= RS.length) rSel = 0;
+  const cv = $('radar'), chips = $('rchips');
+  if (!RS.length) { cv.style.display = 'none'; chips.textContent = ''; return; }
+  cv.style.display = 'block';
+  chips.textContent = '';
+  if (RS.length > 1) RS.forEach((r, i) => chips.append(h('button', { className: i === rSel ? 'on' : '', textContent: r.name, onclick: () => { rSel = i; setRadar(RS); } })));
+  if (!rRaf) rRaf = requestAnimationFrame(rDraw);
+}
+$('radar').addEventListener('click', e => {
+  const r = $('radar').getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+  let best = null, bd = 26; rHits.forEach(p => { const d = Math.hypot(p.x - x, p.y - y); if (d < bd) { bd = d; best = p; } });
+  if (best) window.open(`https://www.google.com/maps?q=${best.lat},${best.lon}`, '_blank', 'noopener');
+});
+function rDraw(now) {
+  rRaf = 0;
+  const cv = $('radar'); if (!RS.length || cv.style.display === 'none' || !cv.offsetParent) return;
+  const dpr = window.devicePixelRatio || 1, W = cv.clientWidth, H = cv.clientHeight;
+  if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+  const g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+  const st = RS[rSel], cx = W / 2, cy = H / 2, rad = Math.min(W, H) / 2 - 22;
+  const pts = st.buses.map(b => ({ ...b, dx: (b.lon - st.lon) * 111320 * Math.cos(st.lat * Math.PI / 180), dy: (b.lat - st.lat) * 110574 }));
+  pts.forEach(p => p.d = Math.hypot(p.dx, p.dy));
+  const far = Math.max(300, ...pts.map(p => p.d)), steps = [250, 500, 1000, 1500, 2000, 3000, 5000];
+  const stepM = steps.find(v => far / v <= 4) || 5000, rings = Math.min(4, Math.ceil(far / stepM)), maxM = rings * stepM, sc = rad / maxM;
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--c').trim() || '#ff6a1f';
+  g.lineWidth = 1; g.font = '10px ui-monospace, monospace'; g.textAlign = 'left';
+  for (let i = 1; i <= rings; i++) { const r = i * stepM * sc; g.strokeStyle = 'rgba(255,106,31,.32)'; g.beginPath(); g.arc(cx, cy, r, 0, 7); g.stroke(); g.fillStyle = 'rgba(255,190,120,.7)'; g.fillText(stepM * i >= 1000 ? (stepM * i / 1000) + ' km' : stepM * i + ' m', cx + 4, cy - r + 11); }
+  g.strokeStyle = 'rgba(255,106,31,.18)'; g.beginPath(); g.moveTo(cx - rad, cy); g.lineTo(cx + rad, cy); g.moveTo(cx, cy - rad); g.lineTo(cx, cy + rad); g.stroke();
+  for (let a = 0; a < 360; a += 15) { const t = a * Math.PI / 180, l = a % 90 ? 4 : 9; g.beginPath(); g.moveTo(cx + Math.sin(t) * rad, cy - Math.cos(t) * rad); g.lineTo(cx + Math.sin(t) * (rad - l), cy - Math.cos(t) * (rad - l)); g.stroke(); }
+  g.fillStyle = 'rgba(255,190,120,.8)'; g.textAlign = 'center'; g.fillText('N', cx, cy - rad - 6);
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches, ang = still ? 0 : ((now - rT0) / 4000 % 1) * Math.PI * 2;
+  if (!still && g.createConicGradient) { const gr = g.createConicGradient(ang - Math.PI / 2 - 1.1, cx, cy); gr.addColorStop(0, 'rgba(255,106,31,0)'); gr.addColorStop(.17, 'rgba(255,106,31,.28)'); gr.addColorStop(.175, 'rgba(255,106,31,0)'); gr.addColorStop(1, 'rgba(255,106,31,0)'); g.fillStyle = gr; g.beginPath(); g.arc(cx, cy, rad, 0, 7); g.fill(); }
+  rHits = []; const pulse = still ? 0.5 : (Math.sin(now / 350) + 1) / 2;
+  pts.sort((a, b) => b.d - a.d).forEach(p => {
+    let x = cx + p.dx * sc, y = cy - p.dy * sc; const dd = Math.hypot(x - cx, y - cy); if (dd > rad) { x = cx + (x - cx) * rad / dd; y = cy + (y - cy) * rad / dd; }
+    const col = LOADC[p.load] || LOADC[''];
+    g.strokeStyle = col; g.globalAlpha = .35; g.setLineDash([3, 4]); g.beginPath(); g.moveTo(cx, cy); g.lineTo(x, y); g.stroke(); g.setLineDash([]); g.globalAlpha = 1;
+    g.fillStyle = col; g.globalAlpha = .22 + .18 * pulse; g.beginPath(); g.arc(x, y, 15 + 5 * pulse, 0, 7); g.fill(); g.globalAlpha = 1;
+    g.shadowColor = col; g.shadowBlur = 14; g.beginPath(); g.arc(x, y, 6.5, 0, 7); g.fill(); g.shadowBlur = 0;
+    g.strokeStyle = '#fff'; g.lineWidth = 1.5; g.beginPath(); g.arc(x, y, 6.5, 0, 7); g.stroke(); g.lineWidth = 1;
+    const label = `${p.svc}  ${p.m <= 0 ? 'Arr' : p.m + ' min'}`; g.font = '700 12px ui-monospace, monospace'; const tw = g.measureText(label).width + 12;
+    let lx = x + 12; if (lx + tw > W - 2) lx = x - 12 - tw; const ly = Math.max(4, Math.min(H - 22, y - 11));
+    g.fillStyle = 'rgba(16,4,3,.88)'; g.fillRect(lx, ly, tw, 20); g.strokeStyle = col; g.strokeRect(lx + .5, ly + .5, tw - 1, 19);
+    g.fillStyle = '#fff'; g.textAlign = 'left'; g.fillText(label, lx + 6, ly + 14);
+    rHits.push({ x, y, lat: p.lat, lon: p.lon });
+  });
+  g.save(); g.translate(cx, cy); g.rotate(Math.PI / 4); g.shadowColor = accent; g.shadowBlur = 12; g.fillStyle = '#fff'; g.fillRect(-6, -6, 12, 12); g.shadowBlur = 0; g.strokeStyle = accent; g.lineWidth = 2.5; g.strokeRect(-6, -6, 12, 12); g.restore();
+  g.font = '11px ui-monospace, monospace'; g.fillStyle = 'rgba(255,190,120,.9)'; g.textAlign = 'left'; g.fillText(st.name.toUpperCase().slice(0, 28), 8, H - 8);
+  g.textAlign = 'right'; g.fillText(pts.length ? pts.length + ' TRACKED' : 'NO POSITIONS', W - 8, H - 8);
+  if (!still) rRaf = requestAnimationFrame(rDraw);
 }
 
 /* ---------- directions ---------- */
 function renderDirections() {
   const set = (id, addr) => { const a = $(id); if (addr) { a.href = 'https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=' + encodeURIComponent(addr + ', Singapore'); a.classList.remove('off'); } else { a.removeAttribute('href'); a.classList.add('off'); } };
   set('toWork', S.work.addr); set('toHome', S.home.addr);
-  $('dirHint').textContent = (S.work.addr && S.home.addr) ? 'Opens Google Maps with live transit directions from where you are.' : 'Add your home and work addresses in Config.';
+  $('dirHint').textContent = (S.work.addr && S.home.addr) ? 'Opens Google Maps with live transit directions from where you are.' : 'Add your home and work addresses in Setup.';
 }
 
 /* ---------- config UI ---------- */
@@ -238,6 +361,51 @@ function renderStops() {
       h('input', { value: (st.services || []).join(','), placeholder: 'Services, e.g. 10,175 (blank = all)', onchange: e => { st.services = e.target.value.split(',').map(x => x.trim()).filter(Boolean); save(); loadBus(); } })),
       h('button', { className: 'x', textContent: 'x', title: 'Remove stop', onclick: () => { S.stops.splice(i, 1); save(); renderStops(); loadBus(); } }))); });
 }
+/* ---------- nearby stops ---------- */
+let nearOpen = '';
+$('findNear').addEventListener('click', () => {
+  const box = $('near'), say = t => { box.textContent = ''; box.append(h('div', { className: 'note', textContent: t })); };
+  if (!S.proxy) return say('Set the transit proxy in Setup first.');
+  if (!navigator.geolocation) return say('This browser cannot share your location.');
+  say('Getting your location...');
+  navigator.geolocation.getCurrentPosition(async pos => {
+    try {
+      const db = await stopDb(), la = pos.coords.latitude, lo = pos.coords.longitude;
+      const list = db.map(s => ({ s, d: km(la, lo, +s[3], +s[4]) * 1000 })).sort((a, b) => a.d - b.d).slice(0, 8);
+      $('nearHint').textContent = hm(new Date()); box.textContent = '';
+      list.forEach(({ s, d }) => {
+        const wrap = h('div', { className: 'nstop' }), body = h('div', { className: 'nsvc' }); body.hidden = nearOpen !== s[0];
+        const tracked = S.stops.find(x => x.code === s[0]);
+        wrap.append(h('button', { type: 'button', onclick: () => { body.hidden = !body.hidden; nearOpen = body.hidden ? '' : s[0]; if (!body.hidden && !body.children.length) nearServices(s[0], body); } },
+          h('span', {}, s[1], h('small', { textContent: s[2] + ' / ' + s[0] }), tracked ? h('span', { className: 'tk', textContent: 'TRACKING' }) : ''), h('span', { className: 'd', textContent: d < 1000 ? Math.round(d) + ' m' : (d / 1000).toFixed(1) + ' km' })), body);
+        box.append(wrap);
+        if (!body.hidden) nearServices(s[0], body);
+      });
+      box.append(h('div', { className: 'note hint', textContent: 'Tap a stop, then tap the services you want to track. Your location is used only for this search and is not stored.' }));
+    } catch (e) { say('Could not load stops (' + e.message + ').'); }
+  }, err => say(err.code === 1 ? 'Location is blocked. Allow it for this site in your phone settings.' : 'Could not get your location.'), { enableHighAccuracy: true, timeout: 12000, maximumAge: 30000 });
+});
+async function nearServices(code, body) {
+  body.textContent = ''; body.append(h('div', { className: 'note', textContent: 'Loading services...' }));
+  try {
+    const j = await px('/arrival?stop=' + code), svcs = (j.Services || []).map(s => ({ no: String(s.ServiceNo), b: s.NextBus })).sort((a, b) => a.no.localeCompare(b.no, undefined, { numeric: true }));
+    body.textContent = ''; if (!svcs.length) { body.append(h('div', { className: 'note', textContent: 'No services reported right now.' })); return; }
+    const all = svcs.map(s => s.no), st = S.stops.find(x => x.code === code), sel = new Set(!st ? [] : (st.services && st.services.length ? st.services.map(x => x.toUpperCase()) : all.map(x => x.toUpperCase())));
+    const apply = () => {
+      const chosen = all.filter(n => sel.has(n.toUpperCase())), i = S.stops.findIndex(x => x.code === code);
+      if (!chosen.length) { if (i >= 0) S.stops.splice(i, 1); }
+      else { const rec = { code, services: chosen.length === all.length ? [] : chosen }; if (i >= 0) S.stops[i] = rec; else S.stops.push(rec); }
+      save(); renderStops(); loadBus();
+    };
+    svcs.forEach(s => {
+      const m = s.b && s.b.EstimatedArrival ? Math.round((new Date(s.b.EstimatedArrival) - Date.now()) / 60000) : null;
+      const btn = h('button', { type: 'button', className: sel.has(s.no.toUpperCase()) ? 'on' : '', onclick: () => { const k = s.no.toUpperCase(); sel.has(k) ? sel.delete(k) : sel.add(k); btn.classList.toggle('on'); apply(); } },
+        s.no, h('small', { textContent: m === null ? '' : m <= 0 ? 'Arr' : m + 'm' }));
+      body.append(btn);
+    });
+  } catch (e) { body.textContent = ''; body.append(h('div', { className: 'note', textContent: 'Could not load services (' + e.message + ').' })); }
+}
+
 let tq; $('stopQ').addEventListener('input', e => { clearTimeout(tq); tq = setTimeout(() => searchStops(e.target.value.trim()), 250); });
 async function searchStops(q) {
   const box = $('stopHits'); box.textContent = ''; if (q.length < 3) return;
@@ -256,6 +424,283 @@ function bindConfig() {
   $('proxy').addEventListener('change', e => { S.proxy = e.target.value.trim(); save(); refreshAll(); }); $('token').addEventListener('change', e => { S.token = e.target.value.trim(); save(); refreshAll(); });
   renderStops(); renderDirections();
 }
+
+/* ---------- shared helpers ---------- */
+// data.gov.sg rate-limits bursts (the rejections look like CORS errors), so requests are spaced out and retried.
+let nextAt = 0;
+const gate = () => new Promise(r => { const now = Date.now(), t = Math.max(0, nextAt - now); nextAt = Math.max(nextAt, now) + 1000; setTimeout(r, t); });
+async function jget(u, tries = 3) {
+  let err;
+  for (let i = 0; i < tries; i++) {
+    await gate();
+    try { const r = await fetch(u); if (r.ok) return await r.json(); err = new Error('HTTP ' + r.status); if (r.status !== 429 && r.status < 500) throw err; } catch (e) { err = e; }
+    await new Promise(r => setTimeout(r, 2500 * (i + 1)));
+  }
+  throw err || new Error('request failed');
+}
+let ME = null;
+function getMe() {
+  return new Promise((res, rej) => {
+    if (ME && Date.now() - ME.t < 60000) return res(ME);
+    if (!navigator.geolocation) return rej(new Error('Location is not supported here'));
+    navigator.geolocation.getCurrentPosition(p => { ME = { lat: p.coords.latitude, lon: p.coords.longitude, t: Date.now() }; res(ME); },
+      e => rej(new Error(e.code === 1 ? 'Location is blocked. Allow it for this site in your phone settings.' : 'Could not get your location')), { enableHighAccuracy: true, timeout: 12000, maximumAge: 30000 });
+  });
+}
+async function geocode(q) {
+  const j = await jget('https://www.onemap.gov.sg/api/common/elastic/search?returnGeom=Y&getAddrDetails=N&pageNum=1&searchVal=' + encodeURIComponent(q));
+  const r = j.results && j.results[0]; if (!r) throw new Error('address not found');
+  return { lat: +r.LATITUDE, lon: +r.LONGITUDE };
+}
+async function anchorPos(a) {
+  if (a === 'me') return getMe();
+  const p = S[a]; if (!p.addr) throw new Error('Add your ' + a + ' address in Setup first');
+  if (p.ll && p.llq === p.addr) return p.ll;
+  const ll = await geocode(p.addr + ' Singapore'); p.ll = ll; p.llq = p.addr; save(); return ll;
+}
+const titleCase = s => String(s).toLowerCase().replace(/\b[a-z]/g, c => c.toUpperCase()).replace(/\bBlk\b/g, 'Blk');
+const COMPASS = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+const compass = d => COMPASS[Math.round(((d % 360) + 360) % 360 / 22.5) % 16];
+
+/* ---------- conditions: UV, temperature, humidity, wind, lightning ---------- */
+const WX = {}; let LT = { pts: [], at: null, err: null };
+async function loadConditions() {
+  const names = { temp: 'air-temperature', hum: 'relative-humidity', ws: 'wind-speed', wd: 'wind-direction', uv: 'uv' };
+  const keys = Object.keys(names), res = await Promise.allSettled(keys.map(k => jget(API + names[k])));
+  keys.forEach((k, i) => { if (res[i].status === 'fulfilled') WX[k] = res[i].value.data; });
+  WX.at = new Date(); renderConditions(); renderAlerts();
+}
+async function loadLightning() {
+  try {
+    const j = await jget(API + 'weather?api=lightning'), rec = j.data.records && j.data.records[0], rd = (rec && rec.item && rec.item.readings) || [];
+    LT = { at: new Date(), when: rec && rec.datetime, err: null, pts: rd.map(r => { const o = r.location || r, la = +(o.latitude !== undefined ? o.latitude : o.lat), lo = +(o.longitude !== undefined ? o.longitude : (o.lon !== undefined ? o.lon : o.lng)); return { lat: la, lon: lo, ok: isFinite(la) && isFinite(lo) }; }) };
+  } catch (e) { LT.err = e.message; }
+  renderConditions(); renderAlerts(); radarStart();
+}
+function nearestReading(feed, l) {
+  if (!feed || !l || !feed.readings || !feed.readings[0]) return null; let best = null;
+  for (const s of feed.stations) { const rd = feed.readings[0].data.find(x => x.stationId === s.id); if (!rd) continue; const d = km(l.latitude, l.longitude, s.location.latitude, s.location.longitude); if (!best || d < best.d) best = { v: rd.value, d, name: s.name }; }
+  return best;
+}
+const uvList = () => (WX.uv && WX.uv.records && WX.uv.records[0] && WX.uv.records[0].index) || [];
+const uvNow = () => { const l = uvList(); return l.length ? l[0].value : null; };
+const uvCat = v => v >= 11 ? 'Extreme' : v >= 8 ? 'Very high' : v >= 6 ? 'High' : v >= 3 ? 'Moderate' : 'Low';
+const uvSev = v => v >= 11 ? 'warn' : v >= 6 ? 'note' : 'ok';
+function lightningNear(l) { let d = Infinity; LT.pts.forEach(p => { if (p.ok) d = Math.min(d, km(l.latitude, l.longitude, p.lat, p.lon)); }); return d; }
+function lightningAlert() {
+  if (!LT.pts.length) return null;
+  let best = null; places().forEach(([label, area]) => { const l = loc(area); if (!l) return; const d = lightningNear(l); if (isFinite(d) && (!best || d < best.d)) best = { d, label }; });
+  if (best && best.d <= 12) return { s: 'warn', title: `Lightning ${best.d.toFixed(1)} km from ${best.label.toLowerCase()}`, sub: `${LT.pts.length} strike${LT.pts.length > 1 ? 's' : ''} reported by NEA` };
+  return { s: 'note', title: `Lightning detected in Singapore (${LT.pts.length})`, sub: best ? `Nearest to your places: ${best.d.toFixed(0)} km` : 'NEA lightning observation' };
+}
+function tile(val, label, s) { return h('div', { className: 'tile ' + (s || '') }, h('b', { textContent: val }), h('span', { textContent: label })); }
+function renderConditions() {
+  const box = $('cond'); box.textContent = '';
+  if (!WX.temp && !WX.uv && !WX.at) { box.append(h('div', { className: 'note', textContent: 'Loading...' })); return; }
+  places().forEach(([label, area]) => {
+    const l = loc(area); if (!l) return;
+    const t = nearestReading(WX.temp, l), hu = nearestReading(WX.hum, l), ws = nearestReading(WX.ws, l), wd = nearestReading(WX.wd, l);
+    box.append(h('div', { className: 't', style: 'margin-top:6px', textContent: `${label}: ${area}` }),
+      h('div', { className: 'tiles' }, tile(t ? t.v.toFixed(1) + '°C' : '--', 'TEMP', t ? '' : 'off'), tile(hu ? Math.round(hu.v) + '%' : '--', 'HUMIDITY', hu ? '' : 'off'),
+        tile(ws ? Math.round(ws.v) + (wd ? ' ' + compass(wd.v) : '') : '--', 'WIND KT', ws ? '' : 'off')),
+      h('div', { className: 's', textContent: t ? `Nearest station: ${t.name} (${t.d.toFixed(1)} km)` : '' }));
+  });
+  if (!places().length) box.append(h('div', { className: 'note', textContent: 'Pick your home and work areas in Setup for local readings.' }));
+  const uv = uvNow(), l = uvList(), peak = l.length ? Math.max(...l.map(x => x.value)) : null, ln = LT.pts.length;
+  box.append(h('div', { className: 't', style: 'margin-top:10px', textContent: 'Island-wide' }),
+    h('div', { className: 'tiles' }, tile(uv === null ? '--' : uv, 'UV NOW ' + (uv === null ? '' : uvCat(uv).toUpperCase()), uv === null ? 'off' : uvSev(uv)),
+      tile(peak === null ? '--' : peak, 'UV PEAK TODAY', peak === null ? 'off' : uvSev(peak)),
+      tile(LT.err ? '--' : ln, 'LIGHTNING', LT.err ? 'off' : ln ? 'warn' : '')));
+  $('condTime').textContent = WX.at ? hm(WX.at) : '';
+}
+
+/* ---------- rain radar (NEA frames over OneMap tiles) ---------- */
+const RAD = { frames: [], idx: 0, playing: true, view: 'island', box: null, tiles: new Map(), tm: 0, at: null, err: null, redraw: 0 };
+let radarBusy = false;
+async function loadRadar() {
+  if (radarBusy) return; radarBusy = true;
+  try {
+    const sgt = ms => new Date(Date.now() + 8 * 3600e3 + ms).toISOString().slice(0, 10), url = d => API + 'weather-radar-images/70km?date=' + d;
+    const j = await jget(url(sgt(0))); let recs = j.data.records || [];
+    if (recs.length < 8) { try { recs = recs.concat((await jget(url(sgt(-864e5)))).data.records || []); } catch {} }
+    RAD.box = j.data.boundaryBox; recs = recs.slice(0, 8).reverse();
+    const got = await Promise.all(recs.map(r => new Promise(res => { const im = new Image(); im.onload = () => res({ t: r.timestamp, im }); im.onerror = () => res(null); im.src = r.image.url; })));
+    RAD.frames = got.filter(Boolean); RAD.idx = Math.max(0, RAD.frames.length - 1); RAD.err = RAD.frames.length ? null : 'images did not load'; RAD.at = new Date();
+  } catch (e) { RAD.err = e.message; }
+  radarBusy = false; radarStart();
+}
+const radarVisible = () => { const c = $('rrad'); return c.offsetParent !== null && !document.hidden; };
+function radarStart() {
+  clearTimeout(RAD.tm); if (!radarVisible()) return; radarDraw();
+  if (RAD.frames.length > 1 && RAD.playing) RAD.tm = setTimeout(() => { RAD.idx = (RAD.idx + 1) % RAD.frames.length; radarStart(); }, RAD.idx === RAD.frames.length - 1 ? 1700 : 650);
+}
+function radarTile(z, x, y) {
+  const k = z + '/' + x + '/' + y; let im = RAD.tiles.get(k);
+  if (!im) { im = new Image(); im.onload = () => { clearTimeout(RAD.redraw); RAD.redraw = setTimeout(() => { if (radarVisible()) radarDraw(); }, 60); }; im.src = `https://www.onemap.gov.sg/maps/tiles/Night/${k}.png`; RAD.tiles.set(k, im); }
+  return im;
+}
+function radarDraw() {
+  const cv = $('rrad'); if (!cv.offsetParent) return;
+  const dpr = window.devicePixelRatio || 1, W = cv.clientWidth, H = W, pw = Math.round(W * dpr);
+  if (cv.width !== pw || cv.height !== pw) { cv.width = pw; cv.height = pw; }
+  const g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.fillStyle = '#003753'; g.fillRect(0, 0, W, H);
+  g.font = '12px ui-monospace, monospace'; g.textAlign = 'center';
+  if (!RAD.box) { g.fillStyle = 'rgba(255,190,120,.8)'; g.fillText(RAD.err ? 'Radar unavailable (' + RAD.err + ')' : 'Loading radar...', W / 2, H / 2); $('radarTime').textContent = ''; return; }
+  const b = RAD.box, wide = RAD.view === 'wide';
+  const clon = wide ? (b.upperLeft.longitude + b.lowerRight.longitude) / 2 : 103.82, clat = wide ? (b.upperLeft.latitude + b.lowerRight.latitude) / 2 : 1.355, span = wide ? (b.lowerRight.longitude - b.upperLeft.longitude) : 0.62;
+  const ppr = W / (span * Math.PI / 180), M = la => Math.log(Math.tan(Math.PI / 4 + la * Math.PI / 360)), mx = lo => W / 2 + (lo - clon) * Math.PI / 180 * ppr, my = la => H / 2 - (M(la) - M(clat)) * ppr;
+  const z = Math.max(8, Math.min(13, Math.ceil(Math.log2(W * dpr * 360 / (256 * span))))), n = 2 ** z;
+  const x0 = Math.floor((clon - span / 2 + 180) / 360 * n), x1 = Math.floor((clon + span / 2 + 180) / 360 * n);
+  const ty = m => Math.floor((1 - m / Math.PI) / 2 * n), y0 = ty(M(clat) + (H / 2) / ppr), y1 = ty(M(clat) - (H / 2) / ppr);
+  if ((x1 - x0 + 1) * (y1 - y0 + 1) <= 40) for (let tx = x0; tx <= x1; tx++) for (let tyy = y0; tyy <= y1; tyy++) {
+    const im = radarTile(z, tx, tyy); if (!(im.complete && im.naturalWidth)) continue;
+    const px = mx(tx / n * 360 - 180), py = H / 2 - (Math.PI * (1 - 2 * tyy / n) - M(clat)) * ppr, sz = 2 * Math.PI / n * ppr; g.drawImage(im, px, py, sz + .6, sz + .6);
+  }
+  const f = RAD.frames[RAD.idx];
+  if (f) { const ax = mx(b.upperLeft.longitude), ay = my(b.upperLeft.latitude), bx = mx(b.lowerRight.longitude), by = my(b.lowerRight.latitude); g.globalAlpha = .85; g.drawImage(f.im, ax, ay, bx - ax, by - ay); g.globalAlpha = 1; }
+  const mark = (lat, lon, label, col) => { const x = mx(lon), y = my(lat); if (x < -10 || y < -10 || x > W + 10 || y > H + 10) return; g.save(); g.translate(x, y); g.rotate(Math.PI / 4); g.fillStyle = '#fff'; g.strokeStyle = col; g.lineWidth = 2.5; g.shadowColor = col; g.shadowBlur = 8; g.fillRect(-4.5, -4.5, 9, 9); g.strokeRect(-4.5, -4.5, 9, 9); g.restore();
+    g.font = '700 11px ui-monospace, monospace'; g.textAlign = 'left'; const tw = g.measureText(label).width + 8; g.fillStyle = 'rgba(16,4,3,.85)'; g.fillRect(x + 9, y - 9, tw, 17); g.fillStyle = '#fff'; g.fillText(label, x + 13, y + 4); };
+  places().forEach(([label, area]) => { const l = loc(area); if (l) mark(l.latitude, l.longitude, label.toUpperCase(), '#ff6a1f'); });
+  if (ME) mark(ME.lat, ME.lon, 'YOU', '#5fd36a');
+  g.font = '16px ui-monospace, monospace'; g.textAlign = 'center'; LT.pts.forEach(p => { if (p.ok) g.fillText('⚡', mx(p.lon), my(p.lat) + 6); });
+  g.font = '700 12px ui-monospace, monospace'; g.textAlign = 'left'; g.fillStyle = 'rgba(16,4,3,.8)'; g.fillRect(6, 6, 124, 20); g.fillStyle = '#fff';
+  if (f) { const mins = Math.round((Date.now() - new Date(f.t)) / 60000); g.fillText(hm(new Date(f.t)) + (mins > 2 ? '  (' + mins + ' min ago)' : '  NOW'), 12, 20); $('radarTime').textContent = 'updated ' + hm(RAD.at || new Date()); }
+  else g.fillText('No radar frames', 12, 20);
+  RAD.frames.forEach((_, i) => { g.fillStyle = i === RAD.idx ? '#fff' : 'rgba(255,255,255,.3)'; g.fillRect(8 + i * 12, H - 16, 8, 8); });
+  g.font = '10px ui-monospace, monospace'; g.fillStyle = 'rgba(255,255,255,.6)'; g.textAlign = 'right'; g.fillText('Radar: NEA / Map: OneMap, SLA', W - 6, H - 6);
+}
+$('rrad').addEventListener('click', () => { RAD.playing = !RAD.playing; $('rPlay').textContent = RAD.playing ? 'Pause' : 'Play'; radarStart(); });
+$('rPlay').addEventListener('click', () => { RAD.playing = !RAD.playing; $('rPlay').textContent = RAD.playing ? 'Pause' : 'Play'; radarStart(); });
+document.querySelectorAll('#c-radar [data-v]').forEach(b => b.addEventListener('click', () => { RAD.view = b.dataset.v; document.querySelectorAll('#c-radar [data-v]').forEach(x => x.classList.toggle('on', x === b)); radarStart(); }));
+$('rLoc').addEventListener('click', async () => { try { await getMe(); $('radarNote').textContent = 'Showing your location. It is not stored.'; } catch (e) { $('radarNote').textContent = e.message; } radarStart(); });
+window.addEventListener('resize', () => { if (radarVisible()) radarDraw(); });
+
+/* ---------- road: carparks and traffic cameras ---------- */
+function svy21(N, E) {
+  const a = 6378137, f = 1 / 298.257223563, oLat = 1.366666 * Math.PI / 180, oLon = 103.833333 * Math.PI / 180, oN = 38744.572, oE = 28001.642, k = 1;
+  const b = a * (1 - f), e2 = 2 * f - f * f, e4 = e2 * e2, e6 = e4 * e2, A0 = 1 - e2 / 4 - 3 * e4 / 64 - 5 * e6 / 256, A2 = 3 / 8 * (e2 + e4 / 4 + 15 * e6 / 128), A4 = 15 / 256 * (e4 + 3 * e6 / 4), A6 = 35 * e6 / 3072;
+  const calcM = lat => a * (A0 * lat - A2 * Math.sin(2 * lat) + A4 * Math.sin(4 * lat) - A6 * Math.sin(6 * lat));
+  const Mp = calcM(oLat) + (N - oN) / k, n = (a - b) / (a + b), n2 = n * n, n3 = n2 * n, n4 = n2 * n2;
+  const G = a * (1 - n) * (1 - n2) * (1 + 9 / 4 * n2 + 225 / 64 * n4) * Math.PI / 180, sig = Mp * Math.PI / (180 * G);
+  const latP = sig + (3 * n / 2 - 27 * n3 / 32) * Math.sin(2 * sig) + (21 * n2 / 16 - 55 * n4 / 32) * Math.sin(4 * sig) + 151 * n3 / 96 * Math.sin(6 * sig) + 1097 * n4 / 512 * Math.sin(8 * sig);
+  const s2 = Math.sin(latP) ** 2, rho = a * (1 - e2) / Math.pow(1 - e2 * s2, 1.5), v = a / Math.sqrt(1 - e2 * s2), psi = v / rho, psi2 = psi * psi, psi3 = psi2 * psi, psi4 = psi3 * psi;
+  const t = Math.tan(latP), t2 = t * t, t4 = t2 * t2, t6 = t4 * t2, Ep = E - oE, x = Ep / (k * v), x3 = x ** 3, x5 = x ** 5, x7 = x ** 7, tr = t / (k * rho);
+  const lat = latP - tr * (Ep * x / 2) + tr * (Ep * x3 / 24) * (-4 * psi2 + 9 * psi * (1 - t2) + 12 * t2)
+    - tr * (Ep * x5 / 720) * (8 * psi4 * (11 - 24 * t2) - 12 * psi3 * (21 - 71 * t2) + 15 * psi2 * (15 - 98 * t2 + 15 * t4) + 180 * psi * (5 * t2 - 3 * t4) + 360 * t4)
+    + tr * (Ep * x7 / 40320) * (1385 + 3633 * t2 + 4095 * t4 + 1575 * t6);
+  const sec = 1 / Math.cos(latP), lon = oLon + x * sec - x3 / 6 * sec * (psi + 2 * t2) + x5 / 120 * sec * (-4 * psi3 * (1 - 6 * t2) + psi2 * (9 - 68 * t2) + 72 * psi * t2 + 24 * t4) - x7 / 5040 * sec * (61 + 662 * t2 + 1320 * t4 + 720 * t6);
+  return [lat * 180 / Math.PI, lon * 180 / Math.PI];
+}
+let CPINFO = null;
+async function carparkInfo() {
+  if (CPINFO) return CPINFO;
+  try { const c = JSON.parse(localStorage.getItem('rasputin.cp.v1') || 'null'); if (c && Date.now() - c.t < 30 * 864e5 && c.list.length) return (CPINFO = c.list); } catch {}
+  const j = await jget('https://data.gov.sg/api/action/datastore_search?resource_id=d_23f946fa557947f93a8043bbef41dd09&limit=5000');
+  const list = j.result.records.map(r => { const p = svy21(+r.y_coord, +r.x_coord); return [r.car_park_no, r.address, +p[0].toFixed(5), +p[1].toFixed(5)]; }).filter(r => isFinite(r[2]) && isFinite(r[3]));
+  CPINFO = list; try { localStorage.setItem('rasputin.cp.v1', JSON.stringify({ t: Date.now(), list })); } catch {}
+  return list;
+}
+const fmtD = m => m < 1000 ? Math.round(m) + ' m' : (m / 1000).toFixed(1) + ' km';
+async function renderCarparks(pos) {
+  const box = $('cps');
+  try {
+    const [info, av] = await Promise.all([carparkInfo(), jget('https://api.data.gov.sg/v1/transport/carpark-availability')]);
+    const m = new Map(); ((av.items[0] && av.items[0].carpark_data) || []).forEach(c => { const ci = (c.carpark_info || []).find(x => x.lot_type === 'C') || (c.carpark_info || [])[0]; if (ci) m.set(c.carpark_number, { free: +ci.lots_available, total: +ci.total_lots }); });
+    const rows = info.filter(r => m.has(r[0])).map(r => ({ r, d: km(pos.lat, pos.lon, r[2], r[3]) * 1000, a: m.get(r[0]) })).sort((a, b) => a.d - b.d).slice(0, 8);
+    box.textContent = ''; if (!rows.length) { box.append(h('div', { className: 'note', textContent: 'No carparks found nearby.' })); return; }
+    rows.forEach(({ r, d, a }) => { const ratio = a.total ? a.free / a.total : 0, s = a.free === 0 ? 'warn' : ratio < .1 ? 'note' : 'ok';
+      box.append(h('div', { className: 'row cp', onclick: () => window.open(`https://www.google.com/maps?q=${r[2]},${r[3]}`, '_blank', 'noopener') }, pill(s, s === 'warn' ? 'FULL' : s === 'note' ? 'LOW' : 'OPEN'),
+        h('div', { className: 'grow' }, h('div', { className: 't', textContent: titleCase(r[1]) }), h('div', { className: 's', textContent: fmtD(d) + ' away / ' + r[0] })),
+        h('div', { className: 'free' }, String(a.free), h('small', { textContent: 'of ' + a.total + ' lots' })))); });
+    box.append(h('div', { className: 'note hint', textContent: 'HDB carparks, car lots only. Tap one to open it in Google Maps.' }));
+    $('cpTime').textContent = hm(new Date());
+  } catch (e) { box.textContent = ''; box.append(h('div', { className: 'note', textContent: 'Could not load carparks (' + e.message + ').' })); }
+}
+async function renderCams(pos) {
+  const box = $('cams');
+  try {
+    const j = await jget('https://api.data.gov.sg/v1/transport/traffic-images'), cams = ((j.items[0] && j.items[0].cameras) || []).map(c => ({ c, d: km(pos.lat, pos.lon, c.location.latitude, c.location.longitude) * 1000 })).sort((a, b) => a.d - b.d).slice(0, 6);
+    box.textContent = ''; if (!cams.length) { box.append(h('div', { className: 'note', textContent: 'No cameras reported.' })); return; }
+    const grid = h('div', { className: 'cams' });
+    cams.forEach(({ c, d }) => grid.append(h('a', { href: c.image, target: '_blank', rel: 'noopener' }, h('img', { src: c.image, loading: 'lazy', alt: 'Traffic camera ' + c.camera_id }), h('span', { textContent: `Cam ${c.camera_id} / ${fmtD(d)} / ${hm(new Date(c.timestamp))}` }))));
+    box.append(grid, h('div', { className: 'note hint', textContent: 'LTA traffic cameras, nearest first. Tap one to enlarge.' }));
+    $('camTime').textContent = hm(new Date());
+  } catch (e) { box.textContent = ''; box.append(h('div', { className: 'note', textContent: 'Could not load cameras (' + e.message + ').' })); }
+}
+
+/* ---------- taxis: free taxis around a point, with history and a typical-for-this-hour baseline ---------- */
+const TAXI_KEY = 'rasputin.taxi.v1';
+function taxiStore() { try { return JSON.parse(localStorage.getItem(TAXI_KEY) || '{}'); } catch { return {}; } }
+async function renderTaxis(pos, a) {
+  const box = $('taxis');
+  try {
+    const j = await jget('https://api.data.gov.sg/v1/transport/taxi-availability'), f = j.features && j.features[0], pts = f.geometry.coordinates, total = f.properties.taxi_count || pts.length;
+    const near = pts.map(p => ({ lon: p[0], lat: p[1], d: km(pos.lat, pos.lon, p[1], p[0]) * 1000 })).filter(p => p.d <= 2000).sort((x, y) => x.d - y.d);
+    const n5 = near.filter(p => p.d <= 500).length, n1 = near.filter(p => p.d <= 1000).length, n2 = near.length;
+    const st = taxiStore(), rec = st[a] || { hist: [], hour: {} }, now = Date.now(), hr = String(new Date().getHours());
+    rec.hist = rec.hist.filter(x => now - x.t < 3 * 3600e3); if (!rec.hist.length || now - rec.hist[rec.hist.length - 1].t > 60000) rec.hist.push({ t: now, n: n1 });
+    const hb = rec.hour[hr] || { avg: n1, n: 0 }; if (!rec.hourT || now - rec.hourT > 600000) { hb.avg = hb.n ? hb.avg + (n1 - hb.avg) / Math.min(hb.n + 1, 20) : n1; hb.n++; rec.hour[hr] = hb; rec.hourT = now; }
+    const track = a !== 'me'; if (!track) rec.hist = [{ t: now, n: n1 }]; else st[a] = rec;
+    try { localStorage.setItem(TAXI_KEY, JSON.stringify(st)); } catch {}
+    box.textContent = '';
+    box.append(h('div', { className: 'tiles' }, tile(n5, 'WITHIN 500 M', n5 ? '' : 'warn'), tile(n1, 'WITHIN 1 KM', n1 ? '' : 'warn'), tile(n2, 'WITHIN 2 KM', n2 ? '' : 'warn')),
+      h('div', { className: 's', style: 'margin-top:6px', textContent: (near.length ? `Nearest free taxi: ${fmtD(near[0].d)}. ` : 'No free taxi within 2 km. ') + `${total.toLocaleString()} free island-wide.` }));
+    const usual = track && rec.hour[hr] && rec.hour[hr].n >= 3 ? rec.hour[hr].avg : null;
+    if (usual !== null) { const diff = n1 - usual, pct = usual ? Math.round(diff / usual * 100) : 0;
+      box.append(h('div', { className: 'tx-sig', textContent: `Usual around ${hr}:00 here: about ${Math.round(usual)} within 1 km (${rec.hour[hr].n} samples). Now ${n1}${Math.abs(pct) >= 25 ? ` (${pct > 0 ? '+' : ''}${pct}%)` : ''}. ` + (pct >= 40 && n1 >= 3 ? 'Supply looks higher than usual. If your booking app shows no cars or surge pricing, taxis may be waiting for better fares.' : pct <= -40 ? 'Fewer free taxis than usual, so a genuine shortage is likely.' : 'About normal.') })); }
+    else if (!track) box.append(h('div', { className: 'note hint', textContent: 'A baseline needs a fixed place. Use Work or Home and it will learn what is normal for each hour.' }));
+    else box.append(h('div', { className: 'note hint', textContent: 'Building a baseline for this hour. Open this panel at the same place and time on a few days and it will show what is normal.' }));
+    // radar-style view + trend
+    const cv = h('canvas'); box.append(cv); const dpr = window.devicePixelRatio || 1, W = box.clientWidth || 320, H = Math.round(W * 0.62); cv.style.height = H + 'px'; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    const g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); const cx = H / 2 + 8, cy = H / 2, R = H / 2 - 8, sc = R / 2000;
+    g.strokeStyle = 'rgba(255,106,31,.35)'; g.fillStyle = 'rgba(255,190,120,.8)'; g.font = '10px ui-monospace, monospace';
+    [500, 1000, 2000].forEach(m => { g.beginPath(); g.arc(cx, cy, m * sc, 0, 7); g.stroke(); g.fillText(m >= 1000 ? m / 1000 + ' km' : m + ' m', cx + 3, cy - m * sc + 10); });
+    const mLat = 110574, mLon = 111320 * Math.cos(pos.lat * Math.PI / 180);
+    g.fillStyle = '#ffd24a'; g.shadowColor = '#ffd24a'; g.shadowBlur = 6; near.forEach(p => { g.beginPath(); g.arc(cx + (p.lon - pos.lon) * mLon * sc, cy - (p.lat - pos.lat) * mLat * sc, 2.4, 0, 7); g.fill(); }); g.shadowBlur = 0;
+    g.save(); g.translate(cx, cy); g.rotate(Math.PI / 4); g.fillStyle = '#fff'; g.strokeStyle = '#ff6a1f'; g.lineWidth = 2.5; g.fillRect(-5, -5, 10, 10); g.strokeRect(-5, -5, 10, 10); g.restore();
+    const hs = rec.hist; const gx = cx + R + 14, gw = W - gx - 8;
+    if (gw > 50) { g.fillStyle = 'rgba(255,190,120,.8)'; g.font = '10px ui-monospace, monospace'; g.textAlign = 'left'; g.fillText('WITHIN 1 KM', gx, 16);
+      if (hs.length > 1) { const mx = Math.max(...hs.map(x => x.n), 1), t0 = hs[0].t, t1 = hs[hs.length - 1].t || t0 + 1; g.strokeStyle = '#ffd24a'; g.lineWidth = 1.5; g.beginPath(); hs.forEach((x, i) => { const px = gx + (x.t - t0) / Math.max(1, t1 - t0) * gw, py = cy + R - (x.n / mx) * (R * 1.4); i ? g.lineTo(px, py) : g.moveTo(px, py); }); g.stroke(); g.fillStyle = 'rgba(255,190,120,.7)'; g.fillText('last ' + Math.max(1, Math.round((t1 - t0) / 60000)) + ' min', gx, H - 6); }
+      else { g.fillStyle = 'rgba(255,190,120,.6)'; g.fillText('trend builds as', gx, cy); g.fillText('you keep this open', gx, cy + 13); } }
+    box.append(h('div', { className: 'note hint', textContent: 'Free taxis only (NEA/LTA feed, about every 30 s). It cannot tell why a taxi is free, so treat a mismatch with your booking app as a clue, not proof.' }));
+    $('taxiTime').textContent = hm(new Date(f.properties.timestamp));
+  } catch (e) { box.textContent = ''; box.append(h('div', { className: 'note', textContent: 'Could not load taxis (' + e.message + ').' })); }
+}
+let ANCHOR = '';
+async function roadGo(a) {
+  ANCHOR = a; document.querySelectorAll('#anchors [data-a]').forEach(b => b.classList.toggle('on', b.dataset.a === a)); $('roadWhere').textContent = 'locating...';
+  try { const pos = await anchorPos(a); $('roadWhere').textContent = a.toUpperCase(); await Promise.allSettled([renderTaxis(pos, a), renderCarparks(pos), renderCams(pos)]); }
+  catch (e) { $('roadWhere').textContent = ''; ['taxis', 'cps', 'cams'].forEach(id => { $(id).textContent = ''; $(id).append(h('div', { className: 'note', textContent: e.message })); }); }
+}
+document.querySelectorAll('#anchors [data-a]').forEach(b => b.addEventListener('click', () => roadGo(b.dataset.a)));
+
+/* ---------- icon dock, tabs, collapsible cards ---------- */
+const ICONS = {
+  home: '<svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></svg>',
+  bus: '<svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="15" rx="2"/><path d="M4 11h16M7 21v-3M17 21v-3"/><circle cx="8" cy="14.5" r=".8"/><circle cx="16" cy="14.5" r=".8"/></svg>',
+  sky: '<svg viewBox="0 0 24 24"><path d="M7 15a4 4 0 010-8 5.5 5.5 0 0110.6 1.2A3.4 3.4 0 0117 15"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></svg>',
+  road: '<svg viewBox="0 0 24 24"><path d="M5 15l1.6-5a2 2 0 011.9-1.4h7a2 2 0 011.9 1.4L19 15"/><rect x="3" y="15" width="18" height="4" rx="1"/><path d="M6 19v1.5M18 19v1.5"/></svg>',
+  setup: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg>',
+};
+const TABS = [['home', 'HOME'], ['bus', 'BUS'], ['sky', 'SKY'], ['road', 'ROAD'], ['setup', 'SETUP']];
+let tab = 'home'; try { tab = localStorage.getItem('rasputin.tab') || 'home'; } catch {}
+if (!TABS.some(t => t[0] === tab)) tab = 'home';
+function setTab(id) {
+  tab = id; try { localStorage.setItem('rasputin.tab', id); } catch {}
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('on', p.dataset.p === id));
+  TABS.forEach(([t]) => $('tab-' + t).classList.toggle('on', t === id));
+  window.scrollTo(0, 0);
+  if (id === 'sky') { radarStart(); if (!RAD.at || Date.now() - RAD.at > 240000) loadRadar(); }
+  if (id === 'bus' && RS.length && !rRaf) rRaf = requestAnimationFrame(rDraw);
+}
+function badge(s) { const b = $('tab-home').querySelector('.badge'); b.className = 'badge' + (s === 'ok' ? '' : ' ' + s); }
+TABS.forEach(([id, label]) => { const b = h('button', { type: 'button', id: 'tab-' + id, onclick: () => setTab(id) }); b.innerHTML = ICONS[id] + '<span>' + label + '</span><i class="badge"></i>'; $('dockNav').append(b); });
+let MIN = {}; try { MIN = JSON.parse(localStorage.getItem('rasputin.min.v1') || '{}'); } catch {}
+document.querySelectorAll('.card').forEach(c => {
+  if (MIN[c.id]) c.classList.add('min');
+  c.querySelector('h2').addEventListener('click', () => { const m = c.classList.toggle('min'); if (m) MIN[c.id] = 1; else delete MIN[c.id]; try { localStorage.setItem('rasputin.min.v1', JSON.stringify(MIN)); } catch {}
+    if (!m) { if (c.id === 'c-radar') radarStart(); if (c.id === 'c-bus' && RS.length && !rRaf) rRaf = requestAnimationFrame(rDraw); } });
+});
 
 /* ---------- orb (lightweight 2D lattice) ---------- */
 let orbMode = 'ok';
@@ -279,10 +724,12 @@ let orbMode = 'ok';
 
 /* ---------- boot ---------- */
 function stamp() { $('updated').textContent = W.at ? 'Updated ' + hm(W.at) : (W.err ? 'Offline' : 'Loading...'); }
-function refreshAll() { loadWeather(); loadMrt(); loadBus(); }
-bindConfig(); refreshAll();
+function refreshAll() { loadWeather(); loadMrt(); loadBus(); setTimeout(loadLightning, 500); setTimeout(loadConditions, 1000); if (tab === 'sky') setTimeout(loadRadar, 1500); }
+bindConfig(); setTab(tab); refreshAll();
 setInterval(() => { if (!document.hidden) { loadBus(); loadMrt(); } }, 30000);
-setInterval(() => { if (!document.hidden) loadWeather(); }, 120000);
+setInterval(() => { if (!document.hidden) { loadWeather(); setTimeout(loadLightning, 500); setTimeout(loadConditions, 1000); } }, 120000);
+setInterval(() => { if (!document.hidden && tab === 'sky') loadRadar(); }, 300000);
+setInterval(() => { if (!document.hidden && tab === 'road' && ANCHOR) roadGo(ANCHOR); }, 120000);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshAll(); });
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 </script>
